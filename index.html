@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Projeto de Redes - Teoria de Grafos</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <body>
+        <h1>Projeto de Redes - Teoria de Grafos</h1>
+        <div class="container">
+            <h2>Deseja colocar algum novo PoP?</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="popInput">PoP:</label>
+                        <div class="row">
+                            <div class="col-7">
+                                <input name="popInput" id="popInput" list="inputPop" class="form-control" type="text" />
+                                <datalist id="inputPop"></datalist>
+                            </div>
+                            <div class="col-1">
+                                →
+                            </div>
+                            <div class="col-4">
+                                <select id="pop_mode0_1" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <div class="form-group">
+                        <label for="aInput">Metrica A:</label>
+                        <input name="aInput" id="aInput" class="form-control" type="number" />
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <div class="form-group">
+                        <label for="bInput">Metrica B:</label>
+                        <input name="bInput" id="bInput" class="form-control" type="number" />
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <div class="form-group">
+                        <label for="cInput">Metrica C:</label>
+                        <input name="cInput" id="cInput" class="form-control" type="number" />
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-6">
+                    <input type="button" class="btn btn-default" value="Insira o PoP!" onclick="insertPoP(inputPop, inputMetricaA, inputMetricaB, inputMetricaC)">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Deseja deletar algum PoP?</h2>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-7">
+                                <select id="pop_mode0" class="form-control"></select>
+                            </div>
+                            <div class="col-5">
+                                <input type="button" class="btn btn-default" value="Delete o PoP!" onclick="popDelete(optionList_0)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Algum roteador falhou?</h2>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-7">
+                                <select id="pop_mode1" class="form-control"></select>
+                            </div>
+                            <div class="col-5">
+                                <input type="button" class="btn btn-default" value="Roteador Falhado!" onclick="popFault(optionList_1)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <h2>Algum enlace falhou?</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <select id="pop_mode2" class="form-control"></select>
+                                    </div>
+                                    <div class="col-5">
+                                        <input type="button" class="btn btn-default" value="Encontre o enlace!" onclick="enlaceFind(optionList_2)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div id="divFind" style="visibility: hidden;">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <select id="pop_mode2_enlaces" class="form-control"></select>
+                                        </div>
+                                        <div class="col-5">
+                                            <input type="button" class="btn btn-default" value="Enlace Falhado!" onclick="enlaceFault(optionList_2, optionList_enlaces)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <h2>Selecione a sua métrica:</h2>
+                        <input name="metrica" type="radio" id="metricaA">
+                        <label for="metricaA">Metrica A</label><br>
+                        <input name="metrica" type="radio" id="metricaB">
+                        <label for="metricaB">Metrica B</label><br>
+                        <input name="metrica" type="radio" id="metricaC">
+                        <label for="metricaC">Metrica C</label><br>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <h2>Selecione o primeiro PoP</h2>
+                        <select id="pop_mode3" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <h2>Selecione o segundo PoP</h2>
+                        <select id="pop_mode4" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <input type="button" class="btn btn-success" value="Calcule" onclick="setPoP(optionList_3, optionList_4)">
+                </div>
+                <div class="result">
+                    <h3>Resultado</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Menor distância é:</p>
+                            <div id="menorDistancia" class="text"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Menor caminho é:</p>
+                            <div id="menorCaminho" class="text"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script type="text/javascript" src="js/option.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+</html>

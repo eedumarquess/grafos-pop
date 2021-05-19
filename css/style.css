@@ -1,0 +1,36 @@
+h1{
+  padding: 70px 0;
+  text-align: center;
+  background: #191251;
+  color: #fff;
+  margin-bottom: 50px;
+}
+
+h2{
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin: 20px 0 10px;
+}
+
+h3{
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.result {
+  width: 100%;
+  padding: 30px;
+  margin: 50px 0;
+  border: 1px solid #999;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.result .text{
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #191251;
+}
